@@ -11,7 +11,7 @@ import {
 
 describe("pinned-memory-store", () => {
   let dir: string;
-  beforeEach(() => { dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-pinned-")); });
+  beforeEach(() => { dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-pinned-")); });
   afterEach(() => fs.rmSync(dir, { recursive: true, force: true }));
 
   it("adds and reads items with dual-file persistence", () => {

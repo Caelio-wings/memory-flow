@@ -1,4 +1,4 @@
-# agent-memory 设计规格
+# memory-flow 设计规格
 
 - 日期：2026-08-02
 - 状态：已确认（用户审阅中）
@@ -7,7 +7,7 @@
 
 ## 1. 项目概述
 
-`agent-memory` 是一个面向 LLM Agent 的**渐进式分层记忆系统**。它从开源项目
+`memory-flow` 是一个面向 LLM Agent 的**渐进式分层记忆系统**。它从开源项目
 OpenHanako（HanaAgent，Apache-2.0，作者 liliMozi）的 `lib/memory/` 记忆子系统
 中忠实提取，去除外围应用层（Electron/React/Server/Bridge/Plugin），保留记忆
 系统的全部核心机制，形成可独立运行、可测试、可演示的个人面试项目。
@@ -71,7 +71,7 @@ OpenHanako（HanaAgent，Apache-2.0，作者 liliMozi）的 `lib/memory/` 记忆
 ## 4. 架构与模块划分
 
 ```
-agent-memory/
+memory-flow/
 ├── package.json
 ├── tsconfig.json
 ├── vitest.config.ts
@@ -330,7 +330,7 @@ npm run demo:real     # 接任意 OpenAI 兼容端点
 
 ## 11. 交付物清单
 
-1. `agent-memory/` 完整代码仓库（TypeScript，Vitest 测试，typecheck 全绿）。
+1. `memory-flow/` 完整代码仓库（TypeScript，Vitest 测试，typecheck 全绿）。
 2. `README.md`：快速开始 + 架构总览 + 出处声明（OpenHanako, Apache-2.0）。
 3. `docs/architecture.md`：逻辑框架图、分层说明、关键机制讲解。
 4. `docs/interview.md`：面试讲稿（设计动机、高频追问与答案、现场演示脚本）。
@@ -339,7 +339,7 @@ npm run demo:real     # 接任意 OpenAI 兼容端点
 
 ## 12. 命名与许可
 
-- 项目名 `agent-memory`；包名 `agent-memory`。
+- 项目名 `memory-flow`；包名 `memory-flow`。
 - 许可证 Apache-2.0；README 顶部注明来源项目与链接。
 - 所有代码为独立重写/移植，不含原仓库版权代码片段以外的大段拷贝（接口与 SQL 结构
   属于功能等价实现）。

@@ -1,5 +1,5 @@
 {
-  "name": "agent-memory",
+  "name": "memory-flow",
   "version": "0.1.0",
   "description": "渐进式分层记忆系统（提取自 OpenHanako）",
   "type": "module",

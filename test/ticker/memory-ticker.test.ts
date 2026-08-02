@@ -19,7 +19,7 @@ describe("createMemoryTicker", () => {
   const clock = createLogicalDayClock(() => new Date(2026, 7, 5, 10, 0));
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-ticker-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-ticker-"));
     memoryDir = path.join(dir, "memory");
     summaryManager = new SessionSummaryManager(path.join(memoryDir, "summaries"));
     factStore = new FactStore(path.join(dir, "facts.db"));

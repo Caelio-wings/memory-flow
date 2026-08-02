@@ -18,7 +18,7 @@ import {
 
 describe("compiled-memory-state", () => {
   let dir: string;
-  beforeEach(() => { dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-state-")); });
+  beforeEach(() => { dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-state-")); });
   afterEach(() => fs.rmSync(dir, { recursive: true, force: true }));
 
   it("normalizes section bodies: strips headings, trims blank runs", () => {

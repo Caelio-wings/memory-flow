@@ -34,7 +34,7 @@ function readOrEmpty(filePath: string): string {
 
 async function main(): Promise<void> {
   const useReal = process.argv.includes("--real");
-  const baseDir = process.env.DEMO_DIR || fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-demo-"));
+  const baseDir = process.env.DEMO_DIR || fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-demo-"));
   const memoryDir = path.join(baseDir, "memory");
   fs.mkdirSync(memoryDir, { recursive: true });
 

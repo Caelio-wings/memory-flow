@@ -1,8 +1,8 @@
-# agent-memory 实施计划
+# memory-flow 实施计划
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 按已确认的设计规格，从零实现 `agent-memory`——一个忠实移植 OpenHanako 记忆系统的渐进式分层记忆库（TypeScript）+ CLI 演示。
+**Goal:** 按已确认的设计规格，从零实现 `memory-flow`——一个忠实移植 OpenHanako 记忆系统的渐进式分层记忆库（TypeScript）+ CLI 演示。
 
 **Architecture:** 六个分层模块（llm / summary / compile / deep-memory / pinned / ticker）+ 两个基础设施模块（time / util）。LLM 通过 `LLMProvider` 接口注入，`FakeLLM` 保证离线演示与测试确定性；`MemoryTicker` 以 10 轮 / 会话结束 / 逻辑日切换三种触发方式驱动编译管线，产物全部为可读 Markdown + SQLite。
 
@@ -13,7 +13,7 @@
 ## 文件结构总览
 
 ```
-agent-memory/
+memory-flow/
 ├── package.json / tsconfig.json / vitest.config.ts / .gitignore / LICENSE
 ├── README.md
 ├── docs/
@@ -63,7 +63,7 @@ agent-memory/
 
 ```json
 {
-  "name": "agent-memory",
+  "name": "memory-flow",
   "version": "0.1.0",
   "description": "渐进式分层记忆系统（提取自 OpenHanako）",
   "type": "module",
@@ -934,7 +934,7 @@ describe("SessionSummaryManager", () => {
   const fake = new FakeLLM();
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-summary-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-summary-"));
     manager = new SessionSummaryManager(path.join(dir, "summaries"));
   });
 
@@ -1498,7 +1498,7 @@ import {
 
 describe("compiled-memory-state", () => {
   let dir: string;
-  beforeEach(() => { dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-state-")); });
+  beforeEach(() => { dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-state-")); });
   afterEach(() => fs.rmSync(dir, { recursive: true, force: true }));
 
   it("normalizes section bodies: strips headings, trims blank runs", () => {
@@ -1737,7 +1737,7 @@ describe("compile pipeline", () => {
   let today: string;
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-compile-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-compile-"));
     memoryDir = path.join(dir, "memory");
     summaryManager = new SessionSummaryManager(path.join(memoryDir, "summaries"));
     fake = new FakeLLM();
@@ -2466,7 +2466,7 @@ describe("FactStore", () => {
   let store: FactStore;
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-facts-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-facts-"));
     store = new FactStore(path.join(dir, "facts.db"));
     store.addBatch([
       { fact: "用户喜欢极简风格", tags: ["user-profile", "极简"], time: "2026-08-02T10:00", session_id: "s1" },
@@ -2891,7 +2891,7 @@ describe("processDirtySessions", () => {
   const fake = new FakeLLM();
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-deep-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-deep-"));
     manager = new SessionSummaryManager(path.join(dir, "summaries"));
     factStore = new FactStore(path.join(dir, "facts.db"));
   });
@@ -3188,7 +3188,7 @@ describe("createMemorySearch", () => {
   let store: FactStore;
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-search-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-search-"));
     store = new FactStore(path.join(dir, "facts.db"));
     store.addBatch([
       { fact: "用户喜欢极简风格", tags: ["user-profile", "极简"], time: "2026-08-02T10:00", session_id: "s1" },
@@ -3350,7 +3350,7 @@ import {
 
 describe("pinned-memory-store", () => {
   let dir: string;
-  beforeEach(() => { dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-pinned-")); });
+  beforeEach(() => { dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-pinned-")); });
   afterEach(() => fs.rmSync(dir, { recursive: true, force: true }));
 
   it("adds and reads items with dual-file persistence", () => {
@@ -3620,7 +3620,7 @@ describe("createMemoryTicker", () => {
   const clock = createLogicalDayClock(() => new Date(2026, 7, 5, 10, 0));
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-ticker-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-ticker-"));
     memoryDir = path.join(dir, "memory");
     summaryManager = new SessionSummaryManager(path.join(memoryDir, "summaries"));
     factStore = new FactStore(path.join(dir, "facts.db"));
@@ -4245,7 +4245,7 @@ describe("e2e demo pipeline", () => {
   const clock = createLogicalDayClock(() => new Date(2026, 7, 5, 10, 0));
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-e2e-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-e2e-"));
     memoryDir = path.join(dir, "memory");
     summaryManager = new SessionSummaryManager(path.join(memoryDir, "summaries"));
     factStore = new FactStore(path.join(dir, "facts.db"));
@@ -4328,7 +4328,7 @@ function step(title: string, content: string): void {
 
 async function main(): Promise<void> {
   const useReal = process.argv.includes("--real");
-  const baseDir = process.env.DEMO_DIR || fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-demo-"));
+  const baseDir = process.env.DEMO_DIR || fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-demo-"));
   const memoryDir = path.join(baseDir, "memory");
   fs.mkdirSync(memoryDir, { recursive: true });
 
@@ -4487,7 +4487,7 @@ Expected: 干净（或仅未跟踪的 demo 输出目录）
 
 ```bash
 git add -A
-git commit -m "chore: 全量验证通过，agent-memory v0.1.0"
+git commit -m "chore: 全量验证通过，memory-flow v0.1.0"
 ```
 
 - [ ] **Step 5: 交付说明**

@@ -33,7 +33,7 @@ describe("compile pipeline", () => {
   let today: string;
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-compile-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-compile-"));
     memoryDir = path.join(dir, "memory");
     summaryManager = new SessionSummaryManager(path.join(memoryDir, "summaries"));
     fake = new FakeLLM();

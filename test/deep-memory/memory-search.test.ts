@@ -10,7 +10,7 @@ describe("createMemorySearch", () => {
   let store: FactStore;
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-search-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-search-"));
     store = new FactStore(path.join(dir, "facts.db"));
     store.addBatch([
       { fact: "用户喜欢极简风格", tags: ["user-profile", "极简"], time: "2026-08-02T10:00", session_id: "s1" },

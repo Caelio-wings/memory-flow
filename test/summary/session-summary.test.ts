@@ -11,7 +11,7 @@ describe("SessionSummaryManager", () => {
   const fake = new FakeLLM();
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-summary-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-summary-"));
     manager = new SessionSummaryManager(path.join(dir, "summaries"));
   });
 

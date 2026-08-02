@@ -14,7 +14,7 @@ describe("processDirtySessions", () => {
   const fake = new FakeLLM();
 
   beforeEach(() => {
-    dir = fs.mkdtempSync(path.join(os.tmpdir(), "agent-memory-deep-"));
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), "memory-flow-deep-"));
     manager = new SessionSummaryManager(path.join(dir, "summaries"));
     factStore = new FactStore(path.join(dir, "facts.db"));
   });
