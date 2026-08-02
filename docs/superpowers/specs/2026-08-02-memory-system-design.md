@@ -167,7 +167,7 @@ interface LLMProvider {
 - `assemble(factsPath, todayPath, weekPath, longtermPath, memoryMdPath)`：四段拼装
   memory.md，纯文件操作。
 
-**deep-memory/fact-store.ts**——`FactStore`（better-sqlite3，WAL）：
+**deep-memory/fact-store.ts**——`FactStore`（Node 内置 `node:sqlite`，WAL；零原生依赖，Node ≥ 22.5 开箱即跑）：
 
 ```sql
 facts(id INTEGER PRIMARY KEY AUTOINCREMENT,
