@@ -1,0 +1,23 @@
+{
+  "name": "agent-memory",
+  "version": "0.1.0",
+  "description": "渐进式分层记忆系统（提取自 OpenHanako）",
+  "type": "module",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "demo": "tsx cli/demo.ts",
+    "demo:real": "tsx cli/demo.ts --real"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.0"
+  }
+}
