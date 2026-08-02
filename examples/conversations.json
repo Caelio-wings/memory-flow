@@ -1,0 +1,28 @@
+{
+  "sessions": [
+    {
+      "id": "2026-08-02-morning",
+      "messages": [
+        { "role": "user", "content": "我是玛丽，一名产品设计师，喜欢极简风格。", "timestamp": "2026-08-02T09:30:00+08:00" },
+        { "role": "assistant", "content": "好的玛丽，我记住了。", "timestamp": "2026-08-02T09:31:00+08:00" },
+        { "role": "user", "content": "最近我在研究 AI Agent 的记忆系统，准备做一个面试项目。", "timestamp": "2026-08-02T09:35:00+08:00" },
+        { "role": "assistant", "content": "记忆系统是很好的切入点，我可以帮你梳理。", "timestamp": "2026-08-02T09:36:00+08:00" }
+      ]
+    },
+    {
+      "id": "2026-08-03-afternoon",
+      "messages": [
+        { "role": "user", "content": "今天我们把记忆分层方案定了：滚动摘要 + 编译传送带。", "timestamp": "2026-08-03T14:00:00+08:00" },
+        { "role": "assistant", "content": "方案清晰，可以开始实现了。", "timestamp": "2026-08-03T14:05:00+08:00" },
+        { "role": "user", "content": "我喜欢用 TypeScript，测试要覆盖核心契约。", "timestamp": "2026-08-03T14:10:00+08:00" }
+      ]
+    },
+    {
+      "id": "2026-08-04-evening",
+      "messages": [
+        { "role": "user", "content": "对了，我下个月要去上海参加一个 AI 大会。", "timestamp": "2026-08-04T19:00:00+08:00" },
+        { "role": "assistant", "content": "好的，到时候可以关注一下 Agent 相关的议题。", "timestamp": "2026-08-04T19:02:00+08:00" }
+      ]
+    }
+  ]
+}

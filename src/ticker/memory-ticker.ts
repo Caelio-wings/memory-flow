@@ -122,6 +122,7 @@ export function createMemoryTicker(opts: MemoryTickerOptions): MemoryTicker {
         since: _getResetAt() || undefined,
         locale,
         timeZone,
+        clock,
       });
       assemble(opts.factsMdPath, opts.todayMdPath, opts.weekMdPath, opts.longtermMdPath, opts.memoryMdPath, { locale });
       opts.onCompiled?.();
@@ -181,6 +182,7 @@ export function createMemoryTicker(opts: MemoryTickerOptions): MemoryTicker {
             since: _getResetAt() || undefined,
             locale,
             timeZone,
+            clock,
           });
           _dailyStepsCompleted.add("compileToday");
         } catch (err) {

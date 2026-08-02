@@ -11,7 +11,7 @@ import {
   hasFactSectionHeading,
   isEmptyFactSection,
 } from "../summary/rolling-summary-format.ts";
-import { getLogicalDay, shiftLogicalDate } from "../time/logical-day.ts";
+import { getLogicalDay, shiftLogicalDate, type MemoryClock } from "../time/logical-day.ts";
 import {
   buildCompileDailyPrompt,
   buildCompileEditableFactsPrompt,
@@ -214,12 +214,12 @@ export async function compileToday(
   summaryManager: SessionSummaryManager,
   outputPath: string,
   llm: LLMProvider,
-  opts: { since?: string; statePath?: string; locale?: string; timeZone?: string } = {},
+  opts: { since?: string; statePath?: string; locale?: string; timeZone?: string; clock?: MemoryClock } = {},
 ): Promise<"compiled" | "skipped"> {
   const memoryDir = path.dirname(outputPath);
   fs.mkdirSync(memoryDir, { recursive: true });
   const statePath = opts.statePath || todayStatePath(memoryDir);
-  const logicalDate = getLogicalDay().logicalDate;
+  const logicalDate = opts.clock ? opts.clock.getLogicalDay().logicalDate : getLogicalDay().logicalDate;
   let state = readTodayState(statePath);
   if (state && state.logicalDate !== logicalDate) {
     atomicWriteSync(outputPath, "");
