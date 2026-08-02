@@ -136,7 +136,7 @@ describe("compile pipeline", () => {
     fs.mkdirSync(memoryDir, { recursive: true });
     const factsMd = path.join(memoryDir, "facts.md");
     const counting = new CountingLLM(fake);
-    // 第一次调用建立基线（水位 = 现有摘要，不重复编译）
+    // 首次运行：空 facts.md + 现有摘要 → 直接编译
     await summaryManager.rollingSummary(
       "s1",
       [{ role: "user", content: "用户喜欢极简风格", timestamp: `${today}T10:00:00+08:00` }],
@@ -144,7 +144,8 @@ describe("compile pipeline", () => {
       { locale: "zh-CN", timeZone: "Asia/Shanghai" },
     );
     await compileEditableFacts(summaryManager, factsMd, counting, { locale: "zh-CN" });
-    expect(counting.calls).toBe(0);
+    expect(counting.calls).toBe(1);
+    expect(fs.readFileSync(factsMd, "utf-8")).toContain("极简风格");
     // 新增摘要 → 增量编译
     await summaryManager.rollingSummary(
       "s2",
@@ -153,10 +154,10 @@ describe("compile pipeline", () => {
       { locale: "zh-CN", timeZone: "Asia/Shanghai" },
     );
     await compileEditableFacts(summaryManager, factsMd, counting, { locale: "zh-CN" });
-    expect(counting.calls).toBe(1);
+    expect(counting.calls).toBe(2);
     expect(fs.readFileSync(factsMd, "utf-8")).toContain("视频剪辑");
     // 无新摘要 → 不再调用 LLM
     await compileEditableFacts(summaryManager, factsMd, counting, { locale: "zh-CN" });
-    expect(counting.calls).toBe(1);
+    expect(counting.calls).toBe(2);
   });
 });

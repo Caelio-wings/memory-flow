@@ -458,7 +458,10 @@ export function ensureEditableFactsBaseline(
   if (!fs.existsSync(outputPath)) atomicWriteSync(outputPath, "");
   const state = readEditableFactsState(statePath);
   const latest = latestSummaryUpdate(summaryManager.getAllSummaries());
-  if (!state.lastCompiledSummaryUpdatedAt && latest) {
+  // 升级保护：facts.md 已有内容但缺水位时，视为旧摘要已吸收，只建立水位不重编。
+  // 首次运行（facts.md 为空）不建水位，让首次编译处理全部现有摘要。
+  const hasExistingContent = normalizeCompiledSectionBody(safeReadFile(outputPath, "")).length > 0;
+  if (!state.lastCompiledSummaryUpdatedAt && latest && hasExistingContent) {
     writeEditableFactsState(statePath, latest);
     return true;
   }
