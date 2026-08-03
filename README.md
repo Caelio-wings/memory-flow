@@ -1,8 +1,7 @@
 # memory-flow
 
-渐进式分层记忆系统——为 LLM Agent 设计的**"按天滚动记忆传送带"**。
+渐进式分层记忆系统——为 LLM Agent 设计的"按天滚动记忆传送带"。
 
-> 本项目基于开源项目 [OpenHanako](https://github.com/liliMozi/openhanako)（HanaAgent，Apache-2.0，作者 liliMozi）的记忆子系统独立移植实现：去除外围应用层，保留滚动摘要、编译管线、深度记忆事实库、置顶记忆与调度器的全部核心机制。接口与 SQL 结构为功能等价实现，许可证沿用 Apache-2.0。
 
 ## 核心思想
 
