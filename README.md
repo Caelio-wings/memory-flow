@@ -54,7 +54,7 @@ src/
 ├── ticker/       # MemoryTicker 调度器
 ├── time/         # 逻辑日（可注入时钟）、时间上下文
 └── util/         # 原子写、PII 脱敏
-cli/demo.ts       # 面试演示 CLI
+cli/demo.ts       # 演示 CLI
 docs/             # 架构文档、面试讲稿、设计规格与实施计划
 test/             # Vitest 测试（格式契约/水位/指纹/检索/调度/e2e）
 ```
